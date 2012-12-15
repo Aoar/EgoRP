@@ -1,0 +1,17 @@
+"Gamemode"
+{
+	"base"		"sandbox"
+    "title"  "EgoRP"
+    "version"   "0.0.1"
+    "menusystem"	"1"
+
+    "author_name"   "Base: Sadistic Slayer, Miss Pink, Pcwizdan, EgoRP: Aoar, Zero"
+    "author_email"  ""
+    "author_url"    ""
+
+    "maps"  "^rp_"
+
+    "icon"  ""
+    "info"  ""
+    "hide"  "0"
+}

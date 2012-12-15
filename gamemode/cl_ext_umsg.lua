@@ -13,7 +13,7 @@ if CLIENT then
 		Custom receive system
 	]]--
 
-	local ReadString = _R.bf_read.ReadString
+	local ReadString = debug.getregistry().bf_read.ReadString
 	local ReadChar = _R.bf_read.ReadChar
 
 	local _buffer = {}
