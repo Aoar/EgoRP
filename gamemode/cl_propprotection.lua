@@ -8,7 +8,7 @@ usermessage.Hook("RPOwner", function( um )
 	local ent = um:ReadEntity()
 	local ply = um:ReadEntity()
 	
-	if( !ValidEntity( ply ) || !ValidEntity( ent ) || !ply:IsPlayer() ) then 
+	if( !IsValid( ply ) || !IsValid( ent ) || !ply:IsPlayer() ) then 
 		owner = "Error"
 	else
 		owner = ply:Nick()
@@ -32,7 +32,7 @@ end )
 hook.Add("Think", "LiteRP_PP", function()
 
 	for k, v in ipairs( PPEnts or {} ) do
-		if( !ValidEntity( v[1] ) || !ValidEntity( v[2] ) ) then
+		if( !IsValid( v[1] ) || !IsValid( v[2] ) ) then
 			table.remove( PPEnts, k )
 		end
 	end
@@ -41,11 +41,11 @@ hook.Add("Think", "LiteRP_PP", function()
 	
 	ThinkWait = os.time()
 	
-	if( !ValidEntity( LocalPlayer() ) ) then return end
+	if( !IsValid( LocalPlayer() ) ) then return end
 	
 	local ent = LocalPlayer():GetEyeTrace().Entity
 	
-	if( !ValidEntity( ent ) ) then return end
+	if( !IsValid( ent ) ) then return end
 	
 	if( ent:IsPlayer() ) then return end
 	
@@ -70,13 +70,13 @@ end )
 
 hook.Add("HUDPaint", "LiteRP_PP", function()
 
-	if( !ValidEntity( LocalPlayer() ) ) then return end
+	if( !IsValid( LocalPlayer() ) ) then return end
 	
 	local ent = LocalPlayer():GetEyeTrace().Entity
 	
-	if( ValidEntity( physgunpickupentity ) ) then ent = physgunpickupentity end 
+	if( IsValid( physgunpickupentity ) ) then ent = physgunpickupentity end 
 	
-	if( !ValidEntity( ent ) ) then return end
+	if( !IsValid( ent ) ) then return end
 	
 	if( ent:IsPlayer() ) then return end
 	
@@ -89,7 +89,7 @@ hook.Add("HUDPaint", "LiteRP_PP", function()
 		end
 	end
 	
-	if( !ValidEntity( ply ) || !ply:IsPlayer() ) then return end
+	if( !IsValid( ply ) || !ply:IsPlayer() ) then return end
 	
 	if( ent:GetPos():Distance( LocalPlayer():GetPos() ) > 300 ) then return end
 	
@@ -100,10 +100,10 @@ hook.Add("HUDPaint", "LiteRP_PP", function()
 end )
 
 function GM:PhysgunPickup( ply, ent )
-	if( ValidEntity( ent ) ) then
+	if( IsValid( ent ) ) then
 		physgunpickupentity = ent 
 	end
-	if( ValidEntity(ent) && ent:IsPlayer() ) then return false end
+	if( IsValid(ent) && ent:IsPlayer() ) then return false end
 end 
 
 function GM:PhysgunDrop( ent )
@@ -138,7 +138,7 @@ local function PPFriends( Panel )
 	
 		for k, v in pairs( player.GetAll() ) do
 		
-			if( ValidEntity( v ) && v != LocalPlayer()) then
+			if( IsValid( v ) && v != LocalPlayer()) then
 				local _FC = "literp_pp_friend_".. v:UserID()
 				
 				if( !ConVarExists( _FC ) ) then

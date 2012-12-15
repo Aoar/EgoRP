@@ -3,7 +3,7 @@ local ExploitableTools = { "wire_winch", "wire_hydraulic", "slider", "hydraulic"
 
 concommand.Add("rp_pp_resend_um", function( ply )
 	for k, v in ipairs( ents.GetAll() ) do
-		if( v.Owner && ValidEntity( v.Owner ) && v.Owner:IsPlayer() && !v:IsWeapon() ) then
+		if( v.Owner && IsValid( v.Owner ) && v.Owner:IsPlayer() && !v:IsWeapon() ) then
 			umsg.Start("RPOwner", ply )
 			umsg.Entity( v )
 			umsg.Entity( v.Owner )
@@ -13,7 +13,7 @@ concommand.Add("rp_pp_resend_um", function( ply )
 end )
 
 local function SendBlocked( ply, msg, ignoretime )
-	if( !ValidEntity( ply ) ) then return end
+	if( !IsValid( ply ) ) then return end
 	
 	msg = msg or "This entity does not belong to you.";
 	
@@ -33,14 +33,14 @@ end
 
 local function IsOwner( ply, ply2 )
 	if ply == ply2 then return true end
-	if(!ValidEntity( ply ) || !ValidEntity( ply2 )) then return false end
+	if(!IsValid( ply ) || !IsValid( ply2 )) then return false end
 	if( tostring( ply:GetInfo("literp_pp_friend_" .. ply2:UserID() ) ) == "1" ) then return true end
 end
 
 hook.Add("PhysgunPickup", "LiteRP:PP", function( ply, ent )
 	if( ent:IsPlayer() ) then return false end
 	
-	if( ent:GetClass() == "prop_physics" && ValidEntity( ply ) && ent.Owner && ent.Owner == ply ) then
+	if( ent:GetClass() == "prop_physics" && IsValid( ply ) && ent.Owner && ent.Owner == ply ) then
 		ent:SetCollisionGroup( COLLISION_GROUP_WEAPON )
 		ent:SetColor(0,0,0,150)
 	end 
@@ -50,7 +50,7 @@ hook.Add("PhysgunPickup", "LiteRP:PP", function( ply, ent )
 		return false;
 	end
 	
-	if( !ValidEntity( ent.Owner ) ) then
+	if( !IsValid( ent.Owner ) ) then
 		SendBlocked( ply )
 		return false;
 	end
@@ -66,7 +66,7 @@ end )
 
 hook.Add("PhysgunDrop", "LiteRP:PP", function( ply, ent )
 
-	if( ent:GetClass() == "prop_physics" && ValidEntity( ply ) ) then
+	if( ent:GetClass() == "prop_physics" && IsValid( ply ) ) then
 		ent:SetCollisionGroup( COLLISION_GROUP_NONE )
 		ent:SetColor(255,255,255,255)
 	end 
@@ -82,7 +82,7 @@ hook.Add("CanPlayerUnfreeze", "LiteRP:PP", function( ply, ent )
 		return false;
 	end
 	
-	if( !ValidEntity( ent.Owner ) ) then
+	if( !IsValid( ent.Owner ) ) then
 		SendBlocked( ply )
 		return false;
 	end
@@ -100,7 +100,7 @@ hook.Add("CanTool", "LiteRP:PP", function( ply, tr, mode )
 	local ent = tr.Entity
 	if( tr.HitWorld ) then SendBlocked( ply, "You cannot tool on the world.", true ) return false end
 	
-	if( !ValidEntity( ent ) ) then return false end
+	if( !IsValid( ent ) ) then return false end
 	
 	if( ent:IsPlayer() ) then return false end
 	
@@ -109,7 +109,7 @@ hook.Add("CanTool", "LiteRP:PP", function( ply, tr, mode )
 		return false;
 	end
 	
-	if( !ValidEntity( ent.Owner ) ) then
+	if( !IsValid( ent.Owner ) ) then
 		SendBlocked( ply, nil, true )
 		return false;
 	end
@@ -131,7 +131,7 @@ hook.Add("CanTool", "LiteRP:PP", function( ply, tr, mode )
 		
 		if(tr2.HitWorld) then SendBlocked( ply, "You cannot constrain to the world.", true ) return false end
 
-		if( tr2.Hit && ValidEntity( _ent ) && !_ent:IsPlayer() ) then
+		if( tr2.Hit && IsValid( _ent ) && !_ent:IsPlayer() ) then
 			if( !IsOwner( _ent.Owner, ply ) ) then return false end
 		end
 		
@@ -146,7 +146,7 @@ hook.Add("CanTool", "LiteRP:PP", function( ply, tr, mode )
 		
 		if(tr2.HitWorld) then SendBlocked( ply, "You cannot constrain to the world.", true ) return false end
 		
-		if( tr2.Hit && ValidEntity( _ent ) && !_ent:IsPlayer() ) then
+		if( tr2.Hit && IsValid( _ent ) && !_ent:IsPlayer() ) then
 			if( !IsOwner( _ent.Owner, ply ) ) then return false end
 		end
 		
@@ -164,7 +164,7 @@ hook.Add("GravGunPickupAllowed", "LiteRP:PP", function( ply, ent )
 		return false;
 	end
 	
-	if( !ValidEntity( ent.Owner ) ) then
+	if( !IsValid( ent.Owner ) ) then
 		SendBlocked( ply, nil )
 		return false;
 	end
@@ -184,7 +184,7 @@ hook.Add("GravGunPunt", "LiteRP:PP", function( ply, ent )
 		return false;
 	end
 	
-	if( !ValidEntity( ent.Owner ) ) then
+	if( !IsValid( ent.Owner ) ) then
 		SendBlocked( ply, nil, true )
 		return false;
 	end
@@ -200,11 +200,11 @@ end )
 
 hook.Add("ShouldCollide", "LiteRP:PP", function( ent1, ent2 )
 	if( ent1:GetClass() == "prop_physics" && ent2:GetClass() == "prop_physics" ) then
-		if( ValidEntity( ent1.Owner ) ) then
+		if( IsValid( ent1.Owner ) ) then
 			ent2:SetPhysicsAttacker( ent1.Owner )
 			return
 		end
-		if( ValidEntity( ent2.Owner ) ) then
+		if( IsValid( ent2.Owner ) ) then
 			ent1:SetPhysicsAttacker( ent2.Owner )
 			return
 		end
@@ -241,7 +241,7 @@ hook.Add("Tick", "LiteRP:PP", function()
 			trace.maxs = v:OBBMaxs()
 			trace = util.TraceHull( trace )	
 			
-			if( ValidEntity( trace.Entity ) ) then
+			if( IsValid( trace.Entity ) ) then
 				local ent = trace.Entity
 				v.StuckEnt = ent
 				local mdl = ent:GetModel()
@@ -259,12 +259,12 @@ hook.Add("Tick", "LiteRP:PP", function()
 			return
 		end
 		
-		if( ValidEntity( v:GetPhysicsObject() ) && v:GetPhysicsObject():IsPenetrating() ) then
+		if( IsValid( v:GetPhysicsObject() ) && v:GetPhysicsObject():IsPenetrating() ) then
 			Collisions[v] = Collisions[v] + 1
 		else
 			Collisions[v] = 0
 			timer.Simple( 1.5, function()
-				if( ValidEntity( v.StuckEnt ) ) then
+				if( IsValid( v.StuckEnt ) ) then
 					v.StuckEnt:SetCollisionGroup( COLLISION_GROUP_NONE )
 					v.StuckEnt = nil
 				end
@@ -275,43 +275,43 @@ hook.Add("Tick", "LiteRP:PP", function()
 end )
 
 hook.Add("PlayerSpawnedProp", "PP", function( ply, model, ent )
-	if( ValidEntity( ply ) && ValidEntity( ent ) ) then
+	if( IsValid( ply ) && IsValid( ent ) ) then
 		ent.Owner = ply;
 		SendUM( ent, ply )
 	end
 end )
 
 hook.Add("PlayerSpawnedEffect", "PP", function( ply, model, ent )
-	if( ValidEntity( ply ) && ValidEntity( ent ) ) then
+	if( IsValid( ply ) && IsValid( ent ) ) then
 		ent.Owner = ply;
 		SendUM( ent, ply )
 	end
 end )
 
 hook.Add("PlayerSpawnedNPC", "PP", function( ply, ent )
-	if( ValidEntity( ply ) && ValidEntity( ent ) ) then
+	if( IsValid( ply ) && IsValid( ent ) ) then
 		ent.Owner = ply;
 		SendUM( ent, ply )
 	end
 end )
 
 hook.Add("PlayerSpawnedRagdoll", "PP", function( ply, model, ent )
-	if( ValidEntity( ply ) && ValidEntity( ent ) ) then
+	if( IsValid( ply ) && IsValid( ent ) ) then
 		ent.Owner = ply;
 		SendUM( ent, ply )
 	end
 end )
 
 hook.Add("PlayerSpawnedSENT", "PP", function( ply, ent )
-	if( ValidEntity( ply ) && ValidEntity( ent ) ) then
+	if( IsValid( ply ) && IsValid( ent ) ) then
 		ent.Owner = ply;
 		SendUM( ent, ply )		
 	end
 end )
 
 hook.Add("PlayerSpawnedVehicle", "PP", function( ply, ent )
-	if( ValidEntity( ent ) && ent:IsCar() ) then ent:Fire("lock", "", 0) return end
-	if( ValidEntity( ply ) && ValidEntity( ent ) ) then
+	if( IsValid( ent ) && ent:IsCar() ) then ent:Fire("lock", "", 0) return end
+	if( IsValid( ply ) && IsValid( ent ) ) then
 		ent.Owner = ply;
 		SendUM( ent, ply )
 	end

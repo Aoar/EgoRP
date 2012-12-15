@@ -48,7 +48,7 @@ function meta:IsCar()
 end
 
 /*function meta:RPGetOwner()
-	if (!ValidEntity(self:GetDTEntity(0))) then
+	if (!IsValid(self:GetDTEntity(0))) then
 		return nil
 	else
 		return self:GetDTEntity(0)
@@ -56,7 +56,7 @@ end
 end*/
 
 function meta:RPGetOwner()
-	if( ValidEntity( self ) ) then
+	if( IsValid( self ) ) then
 		return self:GetDTEntity(0)
 	end
 end
