@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/LiteRP/!svn/ver/102/trunk/gamemode/writer
+END
+sqlite.lua
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/LiteRP/!svn/ver/102/trunk/gamemode/writer/sqlite.lua
+END
+mysqloo.lua
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/LiteRP/!svn/ver/102/trunk/gamemode/writer/mysqloo.lua
+END
+text.lua
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/LiteRP/!svn/ver/92/trunk/gamemode/writer/text.lua
+END
+tmysql.lua
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/LiteRP/!svn/ver/102/trunk/gamemode/writer/tmysql.lua
+END

@@ -1,0 +1,1 @@
+-- RP.AddTeam(name (str), index (num), color (color), model (tbl), loadout (tbl), short (str), max (-2 special| -1 inf| x>0 per 5 plys), minpl (num), wage (num), teamreq (num), desc (str))

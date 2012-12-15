@@ -1,0 +1,147 @@
+
+<<<<<<< .mine
+require("glon") -- GLON GLON
+local DataSaveMethod = "text"
+=======
+local DataSaveMethod = "text"
+>>>>>>> .r67
+local JailPositions = {}
+
+local function InitSaveMethod()
+	include("writer/"..DataSaveMethod..".lua")
+	RP.Print("DataSaveMethod set as "..DataSaveMethod..".", true)
+end
+
+function RP.InitJails()
+	local map = string.lower(game.GetMap())
+	JailPositions = table.Copy(glon.decode(RPD['Jails_'..map]))
+end
+
+function RP.InitializeData()
+	RP.LoadDataFiles()
+	
+	if RPD.DataInitialized == nil then
+		RP.FirstInitializeData()
+	end
+	
+	RP.InitJails()
+end
+
+InitSaveMethod()
+
+RP.Teams = {}
+
+function RP.AddTeam(index, name, color, model, loadout, hp, armor, short, max, wage, teamreq, desc)
+	local tempteam = {
+		index = index,
+		name = name,
+		color = color,
+		model = model,
+		loadout = loadout,
+		hp = hp,
+		armor = armor,
+		short = short,
+		max = max,
+		wage = wage,
+		teamreq = teamreq,
+		desc = desc
+	}
+	table.insert(RP.Teams, tempteam)
+	RP.Print("Team "..index.." ("..name..") Initialized.")
+	team.SetUp(index, name, color)
+end
+
+function RP.PayDay()
+	for k,v in pairs(player.GetAll()) do
+		v:DoPayDay()
+	end
+end
+
+function RP.TeamJoinable(index)
+	if (RP.Teams[index].max == -2 and team.NumPlayers(index) > 0) or (RP.Teams[index].max > 0 and (team.NumPlayers(index) > #player.GetAll()/5/RP.Teams[index].max)) then
+		return false
+	else
+		return true
+	end
+end
+
+function RP.UnarrestPlayer(pardon, self)
+	if timer.IsTimer(self:UserID().."Arrest") then timer.Destroy(self:UserID().."Arrest") end
+	
+	if pardon then
+		for k,v in pairs(self.JailWeps) do
+			self:GiveWeapon(v)
+		end
+	else
+		self:Spawn()
+		self.JailWeps = nil
+	end
+	
+	self.Arrested = false
+	RP.JailedPlayers[self:UniqueID()] = nil
+	
+	RP.Print(self:Nick().." was Unarrested.")
+end
+
+function RP.PlayerJoinable(self)
+	-- Todo: Blacklisting Players
+	return self:IsValid()
+end
+
+function RP.GetJailPos()
+	if JailPositions then
+		local jailpos = math.random(#JailPositions)
+		return Vector(JailPositions[jailpos][1], JailPositions[jailpos][2], JailPositions[jailpos][3])
+	else
+		return nil
+	end
+end
+
+function RP.AddJail(vec)
+	local map = string.lower(game.GetMap())
+	local temptable = {}
+	
+	if JailPositions then
+		temptable = table.Copy(JailPositions)
+	else
+		temptable = {}
+	end
+	
+	table.insert(temptable, {vec.x, vec.y, vec.z})
+	RP.SetData("Jails_"..map, glon.encode(temptable))
+	JailPositions = table.Copy(temptable)
+	RP.Print("Jail at ("..vec.x..", "..vec.y..", "..vec.z..") was added.", true)
+end
+	
+function RP.ResetJails(vec)
+	local map = string.lower(game.GetMap())
+	local temptable = {}
+	table.insert(temptable, {vec.x, vec.y, vec.z})
+	RP.SetData("Jails_"..map, glon.encode(temptable))
+	JailPositions = table.Copy(temptable)
+	RP.Print("All Jails have been removed.", true)
+	RP.Print("Jail at ("..vec.x..", "..vec.y..", "..vec.z..") was added.", true)
+end
+
+function RP.SendMoney(ply)
+	if not ply and not ply:IsValid() then return end
+	umsg.Start("RP_PlayerMoneyUpdate", ply)
+		umsg.Long(ply.Money)
+	umsg.End()
+end
+
+function Notify(ply, msgtype, len, msg)
+	if not ValidEntity(ply) then return end
+	
+	umsg.Start("_Notify", ply)
+		umsg.String(msg)
+		umsg.Short(msgtype)
+		umsg.Long(len)
+	umsg.End()
+end
+
+function NotifyAll(msgtype, len, msg)
+	for k, v in pairs(player.GetAll()) do
+		Notify(v, msgtype, len, msg)
+	end
+end

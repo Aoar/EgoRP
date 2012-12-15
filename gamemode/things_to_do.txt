@@ -1,0 +1,56 @@
+In-Game Class Control (Adding/Removing Classes on the fly)
+Create a hook system so depth can be scripted into classes. (create classes folder too)
+Class Networking(sending player classes)
+Team color = Class color
+
+Admin world prop saver.
+
+Stamina
+Calcview Screen Bob
+
+Unownable doors have optional name argument.
+
+Government has buddies with each other.
+
+Create the owner(server) system.
+RPD Config Editing (clientside)
+RPD Config Saving (clientside)
+RPD MOTD of sort (tells clients the server's configuration)
+
+Useing another player initiates money trade.
+Money Trade.
+
+Item framework (like classes)
+Items stored in RPD
+Pretty much what will be done for classes
+
+Ways to make money. (INNOVATIVE)
+Gangsters - Reliant on Boss, sells drugs to boss
+Citizens - ???
+Mayor - Fixed
+Police - Varible depending on if the mayor likes who they arrest. (THEY LOSE/GAIN MONEY IF THE MAYOR DIS/LIKES THEIR ARRESTS)
+Mob Boss - Gangsters gets paid near nothing without, Mob Boss buys drugs, then pays gangster a share. (if gang doesn't get enough, they can assassinate)
+GunDealer - SELLS GUNS LOL
+Maybe make restrictions which make citizen a prefered class but other classes more lucrative?
+
+RP Menu (Tabbed)
+	F1 - Help
+	FAQ
+	F2 - Classes
+	F3 - Store
+	F4 - Options
+	Server Info
+
+Chat extentions
+	y/yell
+	w/whisper
+	r/radio
+	b/broad
+	(make sure these are intended only to be used for chatting!!)
+
+LiteRP Addon Framework (really just a plugin loader type thing)
+	Vehicle Pack
+	NPC Pack
+	SWEP Pack
+	Inventory Pack
+
