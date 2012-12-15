@@ -5,7 +5,7 @@
     "version"   "0.0.1"
     "menusystem"	"1"
 
-    "author_name"   "Base: Sadistic Slayer, Miss Pink, Pcwizdan, EgoRP: Aoar, Zero"
+    "author_name"   "Original: Sadistic Slayer, Miss Pink, Pcwizdan, EgoRP: Aoar, Zero"
     "author_email"  ""
     "author_url"    ""
 
