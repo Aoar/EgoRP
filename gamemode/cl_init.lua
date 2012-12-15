@@ -4,9 +4,25 @@ include("cl_propprotection.lua")
 include("cl_chat.lua")
 include("cl_scoreboard.lua")
 
--- Don't change these values but if you must, make a new font and change to it.
-surface.CreateFont("coolvetica", 20, 400, true, false, "LiteRPHUDFont") 
-surface.CreateFont("coolvetica", 28, 400, true, false, "LiteRPEntFont")
+-- Don't change these values. If you must, make a new font and change to it.
+
+surface.CreateFont(  "LiteRPHUDFont",
+					{
+					font	= "coolvetica",
+					size	= 20, 
+					weight	= 400, 
+					antialias	= true, 
+					shadow	= false 
+			})
+			
+surface.CreateFont(  "LiteRPEntFont",
+					{
+					font	= "coolvetica",
+					size	= 28, 
+					weight	= 400, 
+					antialias	= true, 
+					shadow	= false 
+			})
 
 function GM:InitPostEntity()
 	RunConsoleCommand("rp_playerinitnetworking")

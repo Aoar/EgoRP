@@ -2,8 +2,23 @@
 include( "player_row.lua" )
 include( "player_frame.lua" )
 
-surface.CreateFont( "coolvetica", 32, 500, true, false, "ScoreboardHeader" )
-surface.CreateFont( "coolvetica", 22, 500, true, false, "ScoreboardSubtitle" )
+surface.CreateFont(  "ScoreboardHeader",
+					{
+					font	= "coolvetica",
+					size	= 32, 
+					weight	= 500, 
+					antialias	= true, 
+					shadow	= false 
+			})
+			
+surface.CreateFont(  "ScoreboardSubtitle",
+					{
+					font	= "coolvetica",
+					size	= 22, 
+					weight	= 500, 
+					antialias	= true, 
+					shadow	= false 
+			})
 
 local texGradient 	= surface.GetTextureID( "gui/center_gradient" )
 local texLogo 		= surface.GetTextureID( "gui/gmod_logo" )
