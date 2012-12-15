@@ -1,8 +1,8 @@
--- Skin for DarkRP gui's
+-- Skin for EgoRP gui's
 SKIN = {}
 
-SKIN.PrintName          = "DarkRP"
-SKIN.Author             = "FPtje Falco"
+SKIN.PrintName          = "EgoRP"
+SKIN.Author             = "Aoar"
 SKIN.DermaVersion       = 1
 SKIN.GwenTexture		= Material("DarkRP/DarkRPSkin.png")
 
