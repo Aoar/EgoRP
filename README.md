@@ -1,4 +1,4 @@
-NARP
+EgoRP
 ====
 
 Garry's Mod Gamemode by Aoar and Zero
