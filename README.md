@@ -1,6 +1,4 @@
 EgoRP
 ====
 
-Apocalyptic modification of DarkRP (LightRP: Rick darkalonio, DarkRP: Rickster, Pcwizdan, Sibre, philxyz, [GNC] Matt, Chrome Bolt, FPtje Falco, Eusion, Drakehawke, EgoRP: Aoar, Zero)
-
-This is currently a WIP, it is currently still DarkRP.
+Creating a new RP gamemode for Garry's Mod using the unfinished "LiteRP" base. Do not try to run this gamemode, there are still errors in the lua.
