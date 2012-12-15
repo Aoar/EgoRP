@@ -25,7 +25,6 @@ function RP.LoadBaseFiles()
 		AddCSLuaFile("rpcl_networking.lua")
 		AddCSLuaFile("rp_config.lua")
 	else
-		include("cl_ext_umsg.lua")
 		include("rpcl_util.lua")
 		include("rpcl_util_entities.lua")
 		include("rpcl_util_player.lua")
