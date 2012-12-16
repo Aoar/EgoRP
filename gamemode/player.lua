@@ -17,7 +17,7 @@ end
 
 function GM:PlayerSpawn(pl)
 	pl:UnSpectate()
-	self:SetPlayerSpeed(pl, RPD.RunSpeed, RPD.WalkSpeed, RPD.SprintSpeed)
+	self:SetPlayerSpeed(pl, 250, 500)
 	pl:SetHealth(RP.Teams[pl.Class].hp)
 	pl:SetArmor(RP.Teams[pl.Class].armor)
 	hook.Call( "PlayerLoadout", GAMEMODE, pl )

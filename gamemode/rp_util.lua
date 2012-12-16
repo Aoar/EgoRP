@@ -44,7 +44,7 @@ end
 function RP.SendClass(pl, index)
 	umsg.ExtStart("RP_CreateClass", pl)
 		umsg.ExtString(index)
-		umsg.ExtString(glon.encode(RP.Teams[index]))
+		umsg.ExtString(util.TableToJSON(RP.Teams[index]))
 	umsg.ExtEnd()
 end
 
