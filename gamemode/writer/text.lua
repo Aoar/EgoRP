@@ -1,4 +1,3 @@
-
 -- Data Header
 local Data = {}
 local META = {}
@@ -17,25 +16,25 @@ end
 
 RPD = setmetatable({}, META)
 
-if !file.Exists("literp/serverdata.txt") then
-	file.Write("literp/serverdata.txt", glon.encode(Data or {}))
+if !file.Exists( "literp/serverdata.txt", "GAME" ) then
+	file.Write("literp/serverdata.txt", util.TableToJSON(Data or {}))
 end
 
-if !file.Exists("literp/classes.txt") then
-	file.Write("literp/classes.txt", glon.encode(RP.Teams or {}))
+if !file.Exists("literp/classes.txt", "GAME") then
+	file.Write("literp/classes.txt", util.TableToJSON(RP.Teams or {}))
 else
-	RP.Teams = table.Copy(glon.decode(file.Read("literp/classes.txt")))
+	RP.Teams = table.Copy(util.JSONToTable(file.Read( "literp/classes.txt", "GAME" )))
 end
 
 -- Writer Functions
 function RP.SetData(info, val)
 	Data[info]=val
-	file.Write("literp/serverdata.txt", glon.encode(Data or {}))
+	file.Write("literp/serverdata.txt", util.TableToJSON(Data or {}))
 end
 
 function RP.GetData(info)
 	if !Data[info] then
-		Data = glon.decode(file.Read("literp/serverdata.txt"))
+		Data = util.JSONToTable(file.Read( "literp/serverdata.txt", "GAME" ))
 	end
 	
 	return Data[info]
@@ -56,7 +55,7 @@ end
 function RP.LoadPlayerInfo(pl)
 	local uid = pl:UniqueID()
 	
-	if !file.Exists("literp/money/"..uid..".txt") then
+	if !file.Exists("literp/money/"..uid..".txt", "GAME") then
 		RP.InitMoney(pl)
 	else
 		RP.ReadMoney(pl)
@@ -85,7 +84,7 @@ function RP.AddClass(name, color, model, loadout, hp, armor, short, max, wage, t
 		desc = desc
 	}
 	RP.Teams[short] = table.Copy(tempteam)
-	file.Write("literp/classes.txt", glon.encode(RP.Teams))
+	file.Write("literp/classes.txt", util.TableToJSON(RP.Teams))
 	RP.Print("Team "..short.." ("..name..") Added.")
 end
 
