@@ -29,7 +29,7 @@ usermessage.Hook("RPOwner", function( um )
 	
 end )
 
-hook.Add("Think", "LiteRP_PP", function()
+hook.Add("Think", "EgoRP_PP", function()
 
 	for k, v in ipairs( PPEnts or {} ) do
 		if( !IsValid( v[1] ) || !IsValid( v[2] ) ) then
@@ -68,7 +68,7 @@ hook.Add("Think", "LiteRP_PP", function()
 	
 end )
 
-hook.Add("HUDPaint", "LiteRP_PP", function()
+hook.Add("HUDPaint", "EgoRP_PP", function()
 
 	if( !IsValid( LocalPlayer() ) ) then return end
 	
@@ -95,7 +95,7 @@ hook.Add("HUDPaint", "LiteRP_PP", function()
 	
 	local pos = ent:LocalToWorld( ent:OBBCenter() ):ToScreen()
 	
-	draw.SimpleTextOutlined("Owner: "..ply:Nick(), "LiteRPEntFont", pos.x, pos.y, Color(255,255,255,230), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0,150,200,230))
+	draw.SimpleTextOutlined("Owner: "..ply:Nick(), "EgoRPEntFont", pos.x, pos.y, Color(255,255,255,230), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0,150,200,230))
 
 end )
 
@@ -110,9 +110,9 @@ function GM:PhysgunDrop( ent )
 	physgunpickupentity = nil
 end
 
-concommand.Add("literp_pp_clearfriends", function()
+concommand.Add("EgoRP_pp_clearfriends", function()
 	for k, v in pairs( player.GetAll() ) do
-		local cmd = "literp_pp_friend_" .. v:SteamID() 
+		local cmd = "EgoRP_pp_friend_" .. v:SteamID() 
 		if( ConVarExists( cmd ) ) then
 			RunConsoleCommand( cmd, "0" )
 		end
@@ -139,7 +139,7 @@ local function PPFriends( Panel )
 		for k, v in pairs( player.GetAll() ) do
 		
 			if( IsValid( v ) && v != LocalPlayer()) then
-				local _FC = "literp_pp_friend_".. v:UserID()
+				local _FC = "EgoRP_pp_friend_".. v:UserID()
 				
 				if( !ConVarExists( _FC ) ) then
 					CreateClientConVar( _FC, 0, false, true )
@@ -155,7 +155,7 @@ local function PPFriends( Panel )
 	
 	Panel:AddControl( "Label", { Text = "" } )
 	
-	Panel:AddControl( "Button", { Text  = "Clear Friends", Command = "literp_pp_clearfriends" } )
+	Panel:AddControl( "Button", { Text  = "Clear Friends", Command = "EgoRP_pp_clearfriends" } )
 end
 
 hook.Add("SpawnMenuOpen", "PP", function()
@@ -167,7 +167,7 @@ hook.Add("SpawnMenuOpen", "PP", function()
 end )
 
 hook.Add("PopulateToolMenu", "PP", function()
-	spawnmenu.AddToolMenuOption("LiteRP", "Prop Protection", "Friends", "Friends", "", "", PPFriends )
+	spawnmenu.AddToolMenuOption("EgoRP", "Prop Protection", "Friends", "Friends", "", "", PPFriends )
 end )
 
 

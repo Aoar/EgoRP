@@ -11,7 +11,7 @@ end
 
 function RP.InitJails()
 	local map = string.lower(game.GetMap())
-	JailPositions = table.Copy(glon.decode(RPD['Jails_'..map]))
+	JailPositions = table.Copy(util.TableToJSON(RPD['Jails_'..map]))
 end
 
 function RP.InitializeData()

@@ -1,22 +1,24 @@
 
 RP = {}
 
--- Just incase all hell falls out due to shitty coders.
+-- This is just incase code errors are made.
 TEAM_CITIZEN = 1
 team.SetUp(TEAM_CITIZEN, "Citizen", Color(0, 160, 255))
 
 include("rp_config.lua")
 
-GM.Name = "LiteRP"
-GM.Version = 0.6
-GM.Author = "Sadistic Slayer, Miss Pink, Pcwizdan"
-GM.Email = "ExiledServers@Gmail.com"
-GM.Website = "ExiledServers.net"
-GM.Subversion = "" -- If you must fucking change the name please just add it here, you only shit up the gamemode more.
+-- If you change the name things will break, change the Subversion instead.
+-- Please make sure you leave the authors intact, we've all spent hours making this gamemode work.
 
+GM.Name = "EgoRP"
+GM.Version = "0.0.1"
+GM.Author = "Original: Sadistic Slayer, Miss Pink, Pcwizdan, EgoRP: Aoar, Zero"
+GM.Email = ""
+GM.Website = ""
+GM.Subversion = ""
 DeriveGamemode("sandbox")
 
--- Precache Playermodels (More Gamemodes should do this)
+-- Precache Playermodels
 util.PrecacheModel("models/player/alyx.mdl")
 util.PrecacheModel("models/player/barney.mdl")
 util.PrecacheModel("models/player/breen.mdl")
@@ -80,10 +82,11 @@ util.PrecacheModel("models/player/Hostage/hostage_04.mdl")
 util.PrecacheModel("models/player/Phoenix.mdl")
 util.PrecacheModel("models/player/urban.mdl")
 
-function GM:SetPlayerSpeed(pl, run, walk, sprint)
-	pl:SetMaxSpeed(run)
-	pl:SetWalkSpeed(walk)
-	pl:SetRunSpeed(sprint)
+function playerSetSpeed(ply)
+ 
+	GAMEMODE:SetPlayerSpeed(ply, 250, 500)
+	-- Editing these values will change the walk and sprint speed
+	-- "(ply, walk speed, sprint speed)"
 end
 
 -- Thanks JetBoom

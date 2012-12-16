@@ -14,8 +14,6 @@ AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_propprotection.lua")
 AddCSLuaFile("cl_chat.lua")
 
-AddCSLuaFile( "cl_scoreboard.lua" )
-
 RunConsoleCommand("physgun_limited", "1")
 RunConsoleCommand("sbox_godmode", "0")
 RunConsoleCommand("sbox_plpldamage", "0")

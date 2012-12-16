@@ -46,9 +46,9 @@ Chat extentions
 	w/whisper
 	r/radio
 	b/broad
-	(make sure these are intended only to be used for chatting!!)
-
-LiteRP Addon Framework (really just a plugin loader type thing)
+	(Make sure these are intended only to be used for chatting)
+	
+EgoRP Addon Framework (really just a plugin loader type thing)
 	Vehicle Pack
 	NPC Pack
 	SWEP Pack

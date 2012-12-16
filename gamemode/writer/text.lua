@@ -16,25 +16,25 @@ end
 
 RPD = setmetatable({}, META)
 
-if !file.Exists( "literp/serverdata.txt", "GAME" ) then
-	file.Write("literp/serverdata.txt", util.TableToJSON(Data or {}))
+if !file.Exists( "EgoRP/serverdata.txt", "GAME" ) then
+	file.Write("EgoRP/serverdata.txt", util.TableToJSON(Data or {}))
 end
 
-if !file.Exists("literp/classes.txt", "GAME") then
-	file.Write("literp/classes.txt", util.TableToJSON(RP.Teams or {}))
+if !file.Exists("EgoRP/classes.txt", "GAME") then
+	file.Write("EgoRP/classes.txt", util.TableToJSON(RP.Teams or {}))
 else
-	RP.Teams = table.Copy(util.JSONToTable(file.Read( "literp/classes.txt", "GAME" )))
+	RP.Teams = table.Copy(util.JSONToTable(file.Read( "EgoRP/classes.txt", "GAME" )))
 end
 
 -- Writer Functions
 function RP.SetData(info, val)
 	Data[info]=val
-	file.Write("literp/serverdata.txt", util.TableToJSON(Data or {}))
+	file.Write("EgoRP/serverdata.txt", util.TableToJSON(Data or {}))
 end
 
 function RP.GetData(info)
 	if !Data[info] then
-		Data = util.JSONToTable(file.Read( "literp/serverdata.txt", "GAME" ))
+		Data = util.JSONToTable(file.Read( "EgoRP/serverdata.txt", "GAME" ))
 	end
 	
 	return Data[info]
@@ -43,19 +43,19 @@ end
 function RP.SaveMoney(pl)
 	local uid = pl:UniqueID()
 	local money = pl:GetMoney()
-	file.Write("literp/money/"..uid..".txt", money)
+	file.Write("EgoRP/money/"..uid..".txt", money)
 end
 
 function RP.ReadMoney(pl)
 	local uid = pl:UniqueID()
-	local money = file.Read("literp/money/"..uid..".txt")
+	local money = file.Read("EgoRP/money/"..uid..".txt")
 	pl:SetMoney(money, true)
 end
 
 function RP.LoadPlayerInfo(pl)
 	local uid = pl:UniqueID()
 	
-	if !file.Exists("literp/money/"..uid..".txt", "GAME") then
+	if !file.Exists("EgoRP/money/"..uid..".txt", "GAME") then
 		RP.InitMoney(pl)
 	else
 		RP.ReadMoney(pl)
@@ -84,7 +84,7 @@ function RP.AddClass(name, color, model, loadout, hp, armor, short, max, wage, t
 		desc = desc
 	}
 	RP.Teams[short] = table.Copy(tempteam)
-	file.Write("literp/classes.txt", util.TableToJSON(RP.Teams))
+	file.Write("EgoRP/classes.txt", util.TableToJSON(RP.Teams))
 	RP.Print("Team "..short.." ("..name..") Added.")
 end
 

@@ -9,7 +9,7 @@ include("cl_chat.lua")
 
 -- Don't change these values. If you must, make a new font and change to it.
 
-surface.CreateFont(  "LiteRPHUDFont",
+surface.CreateFont(  "EgoRPHUDFont",
 					{
 					font	= "coolvetica",
 					size	= 20, 
@@ -18,7 +18,7 @@ surface.CreateFont(  "LiteRPHUDFont",
 					shadow	= false 
 			})
 			
-surface.CreateFont(  "LiteRPEntFont",
+surface.CreateFont(  "EgoRPEntFont",
 					{
 					font	= "coolvetica",
 					size	= 28, 
@@ -46,12 +46,12 @@ function GM:HUDPaint()
 	
 	if hp > 0 then
 		if armor > 0 then
-			draw.SimpleTextOutlined("Money: "..money, "LiteRPHUDFont", 30, h-80, Color(255,255,255,230), TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(0,175,0,230))
-			draw.SimpleTextOutlined("Health: "..hp, "LiteRPHUDFont", 30, h-60, Color(255,255,255,230), TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(200,0,0,230))
-			draw.SimpleTextOutlined("Armor: "..armor, "LiteRPHUDFont", 30, h-40, Color(255,255,255,230), TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(0,0,150,230))
+			draw.SimpleTextOutlined("Money: "..money, "EgoRPHUDFont", 30, h-80, Color(255,255,255,230), TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(0,175,0,230))
+			draw.SimpleTextOutlined("Health: "..hp, "EgoRPHUDFont", 30, h-60, Color(255,255,255,230), TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(200,0,0,230))
+			draw.SimpleTextOutlined("Armor: "..armor, "EgoRPHUDFont", 30, h-40, Color(255,255,255,230), TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(0,0,150,230))
 		else
-			draw.SimpleTextOutlined("Money: "..money, "LiteRPHUDFont", 30, h-60, Color(255,255,255,230), TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(0,175,0,230))
-			draw.SimpleTextOutlined("Health: "..hp, "LiteRPHUDFont", 30, h-40, Color(255,255,255,230), TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(200,0,0,230))
+			draw.SimpleTextOutlined("Money: "..money, "EgoRPHUDFont", 30, h-60, Color(255,255,255,230), TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(0,175,0,230))
+			draw.SimpleTextOutlined("Health: "..hp, "EgoRPHUDFont", 30, h-40, Color(255,255,255,230), TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT, 1, Color(200,0,0,230))
 		end
 	end
 end
@@ -70,10 +70,10 @@ function GM:PaintEnts()
 			entpos = ent:LocalToWorld(ent:OBBCenter()+Vector(0,0,20)):ToScreen()
 		end
 		
-		draw.SimpleTextOutlined("Owned By: "..pl:Nick(), "LiteRPEntFont", entpos.x, entpos.y, Color(255,255,255,230), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0,150,200,230))
+		draw.SimpleTextOutlined("Owned By: "..pl:Nick(), "EgoRPEntFont", entpos.x, entpos.y, Color(255,255,255,230), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0,150,200,230))
 	elseif ent and ent:IsValid() and ent:IsOwnable() and (ent:GetPos():Distance(LocalPlayer():GetPos()) < 300) and (!pl or !pl:IsValid()) then
 		local entpos = ent:LocalToWorld(ent:OBBCenter()):ToScreen()
-		draw.SimpleTextOutlined("Unowned", "LiteRPEntFont", entpos.x, entpos.y, Color(255,255,255,230), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(175,75,75,230))
+		draw.SimpleTextOutlined("Unowned", "EgoRPEntFont", entpos.x, entpos.y, Color(255,255,255,230), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(175,75,75,230))
 	end
 end
 	

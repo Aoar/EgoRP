@@ -34,10 +34,10 @@ end
 local function IsOwner( ply, ply2 )
 	if ply == ply2 then return true end
 	if(!IsValid( ply ) || !IsValid( ply2 )) then return false end
-	if( tostring( ply:GetInfo("literp_pp_friend_" .. ply2:UserID() ) ) == "1" ) then return true end
+	if( tostring( ply:GetInfo("EgoRP_pp_friend_" .. ply2:UserID() ) ) == "1" ) then return true end
 end
 
-hook.Add("PhysgunPickup", "LiteRP:PP", function( ply, ent )
+hook.Add("PhysgunPickup", "EgoRP:PP", function( ply, ent )
 	if( ent:IsPlayer() ) then return false end
 	
 	if( ent:GetClass() == "prop_physics" && IsValid( ply ) && ent.Owner && ent.Owner == ply ) then
@@ -64,7 +64,7 @@ hook.Add("PhysgunPickup", "LiteRP:PP", function( ply, ent )
 	
 end )
 
-hook.Add("PhysgunDrop", "LiteRP:PP", function( ply, ent )
+hook.Add("PhysgunDrop", "EgoRP:PP", function( ply, ent )
 
 	if( ent:GetClass() == "prop_physics" && IsValid( ply ) ) then
 		ent:SetCollisionGroup( COLLISION_GROUP_NONE )
@@ -74,7 +74,7 @@ hook.Add("PhysgunDrop", "LiteRP:PP", function( ply, ent )
 	ent:SetPhysicsAttacker( ply )
 end )
 
-hook.Add("CanPlayerUnfreeze", "LiteRP:PP", function( ply, ent )
+hook.Add("CanPlayerUnfreeze", "EgoRP:PP", function( ply, ent )
 	if( ent:IsPlayer() ) then return false end
 	
 	if( table.HasValue( NoPickupEntities, ent:GetClass() ) ) then 
@@ -96,7 +96,7 @@ hook.Add("CanPlayerUnfreeze", "LiteRP:PP", function( ply, ent )
 	
 end )
 
-hook.Add("CanTool", "LiteRP:PP", function( ply, tr, mode )
+hook.Add("CanTool", "EgoRP:PP", function( ply, tr, mode )
 	local ent = tr.Entity
 	if( tr.HitWorld ) then SendBlocked( ply, "You cannot tool on the world.", true ) return false end
 	
@@ -154,7 +154,7 @@ hook.Add("CanTool", "LiteRP:PP", function( ply, tr, mode )
 	
 end )
 
-hook.Add("GravGunPickupAllowed", "LiteRP:PP", function( ply, ent )
+hook.Add("GravGunPickupAllowed", "EgoRP:PP", function( ply, ent )
 	if( ent:IsPlayer() ) then return false end
 	
 	if( ply:GetEyeTrace().HitWorld ) then return false end
@@ -176,7 +176,7 @@ hook.Add("GravGunPickupAllowed", "LiteRP:PP", function( ply, ent )
 	
 end )
 
-hook.Add("GravGunPunt", "LiteRP:PP", function( ply, ent )
+hook.Add("GravGunPunt", "EgoRP:PP", function( ply, ent )
 	if( ent:IsPlayer() ) then return false end
 	
 	if( table.HasValue( NoPickupEntities, ent:GetClass() ) ) then 
@@ -198,7 +198,7 @@ hook.Add("GravGunPunt", "LiteRP:PP", function( ply, ent )
 	
 end )
 
-hook.Add("ShouldCollide", "LiteRP:PP", function( ent1, ent2 )
+hook.Add("ShouldCollide", "EgoRP:PP", function( ent1, ent2 )
 	if( ent1:GetClass() == "prop_physics" && ent2:GetClass() == "prop_physics" ) then
 		if( IsValid( ent1.Owner ) ) then
 			ent2:SetPhysicsAttacker( ent1.Owner )
@@ -223,7 +223,7 @@ end
 
 local Collisions = {}
 
-hook.Add("Tick", "LiteRP:PP", function()
+hook.Add("Tick", "EgoRP:PP", function()
 	for k, v in ipairs( player.GetAll() ) do 
 		if( !Collisions[v] ) then Collisions[v] = 0 end
 		if( Collisions[v] > 150 && !v.AYS ) then
@@ -317,10 +317,10 @@ hook.Add("PlayerSpawnedVehicle", "PP", function( ply, ent )
 	end
 end )
 
-hook.Add("PlayerSpawnProp", "LiteRP", function() return tobool( RPD.SpawnProps ) end)
-hook.Add("PlayerSpawnRagdoll", "LiteRP", function() return tobool( RPD.SpawnRagdolls ) end)
-hook.Add("PlayerSpawnVehicle", "LiteRP", function() return tobool( RPD.SpawnVehicles ) end)
-hook.Add("PlayerSpawnSwEP", "LiteRP", function() return tobool( RPD.SpawnSWEPs ) end)
-hook.Add("PlayerSpawnSENT", "LiteRP", function() return tobool( RPD.SpawnSENTs ) end)
-hook.Add("PlayerSpawnNPC", "LiteRP", function() return tobool( RPD.SpawnNPCs ) end)
-hook.Add("PlayerSpawnEffect", "LiteRP", function() return tobool( RPD.SpawnEffects ) end)
+hook.Add("PlayerSpawnProp", "EgoRP", function() return tobool( RPD.SpawnProps ) end)
+hook.Add("PlayerSpawnRagdoll", "EgoRP", function() return tobool( RPD.SpawnRagdolls ) end)
+hook.Add("PlayerSpawnVehicle", "EgoRP", function() return tobool( RPD.SpawnVehicles ) end)
+hook.Add("PlayerSpawnSwEP", "EgoRP", function() return tobool( RPD.SpawnSWEPs ) end)
+hook.Add("PlayerSpawnSENT", "EgoRP", function() return tobool( RPD.SpawnSENTs ) end)
+hook.Add("PlayerSpawnNPC", "EgoRP", function() return tobool( RPD.SpawnNPCs ) end)
+hook.Add("PlayerSpawnEffect", "EgoRP", function() return tobool( RPD.SpawnEffects ) end)

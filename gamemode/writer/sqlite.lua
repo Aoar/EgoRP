@@ -17,10 +17,10 @@ end
 
 RPD = setmetatable({}, META)
 
-sql.Query("CREATE TABLE IF NOT EXISTS literp_data ( data TEXT NOT NULL PRIMARY KEY, value TEXT )")
-sql.Query("CREATE TABLE IF NOT EXISTS literp_classes( class TEXT NOT NULL PRIMARY KEY, data TEXT )")
+sql.Query("CREATE TABLE IF NOT EXISTS EgoRP_data ( data TEXT NOT NULL PRIMARY KEY, value TEXT )")
+sql.Query("CREATE TABLE IF NOT EXISTS EgoRP_classes( class TEXT NOT NULL PRIMARY KEY, data TEXT )")
 
-local classtbl = sql.Query("SELECT * FROM literp_classes") or {}
+local classtbl = sql.Query("SELECT * FROM EgoRP_classes") or {}
 for k, v in pairs(classtbl) do
 	RP.Teams[tostring(k)] = glon.decode(v)
 end
@@ -28,12 +28,12 @@ end
 -- Writer Functions
 function RP.SetData(info, val)
 	Data[info]=val
-	sql.Query(string.format("REPLACE INTO literp_data ( data, value ) VALUES ( %s, %s )", SQLStr(info), SQLStr(val)))
+	sql.Query(string.format("REPLACE INTO EgoRP_data ( data, value ) VALUES ( %s, %s )", SQLStr(info), SQLStr(val)))
 end
 
 function RP.GetData(info)
 	if !Data[info] then
-		Data[info] = sql.QueryValue("SELECT value FROM literp_data WHERE data = "..SQLStr(info).."")
+		Data[info] = sql.QueryValue("SELECT value FROM EgoRP_data WHERE data = "..SQLStr(info).."")
 	end
 	
 	return Data[info]
@@ -80,7 +80,7 @@ function RP.AddClass(name, color, model, loadout, hp, armor, short, max, wage, t
 		desc = desc
 	}
 	RP.Teams[short] = tempteam
-	sql.Query("REPLACE INTO literp_classes ( class, data ) VALUES ( "..SQLStr(short)..", "..SQLStr(glon.encode(tempteam)).." )")
+	sql.Query("REPLACE INTO EgoRP_classes ( class, data ) VALUES ( "..SQLStr(short)..", "..SQLStr(glon.encode(tempteam)).." )")
 	RP.Print("Team "..short.." ("..name..") Added.")
 end
 
