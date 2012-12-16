@@ -54,7 +54,7 @@ end
 
 function meta:RPGetOwner()
 	if( self:IsDoor() || self:IsCar() ) then 
-		if( ValidEntity( self:GetDTEntity(0) ) ) then 
+		if( IsValid( self:GetDTEntity(0) ) ) then 
 			return self:GetDTEntity(0) 
 		else
 			return nil

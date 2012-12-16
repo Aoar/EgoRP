@@ -6,12 +6,10 @@ DeriveGamemode("sandbox")
 
 include("shared.lua")
 include("player.lua")
-include("sv_propprotection.lua")
 include("sv_chat.lua")
 
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
-AddCSLuaFile("cl_propprotection.lua")
 AddCSLuaFile("cl_chat.lua")
 
 RunConsoleCommand("physgun_limited", "1")

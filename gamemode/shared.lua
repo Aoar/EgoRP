@@ -84,8 +84,8 @@ util.PrecacheModel("models/player/urban.mdl")
 
 function playerSetSpeed(ply)
  
-	GAMEMODE:SetPlayerSpeed(ply, 250, 500)
-	-- Editing these values will change the walk and sprint speed
+	GAMEMODE:SetPlayerSpeed(ply, 50, 100)
+	-- Editing these values will change the walk and sprint speed (Default: 50, 100)
 	-- "(ply, walk speed, sprint speed)"
 end
 
