@@ -78,7 +78,7 @@ function meta:BuyDoor(pl)
 	elseif self:IsDoor() and !self:IsUnownable() and tonumber(RPD.DoorLimit) <= pl.OwnedDoors then
 		Notify(pl, 1, 4, "You have reached the door limit..")
 	elseif self:IsDoor() and !self:IsUnownable() and tonumber(RPD.DoorCost) >= pl:GetMoney() then
-		Notify(pl, 1, 4, "You are too poor to buy this door for $"..RPD.DoorCost.."..")
+		Notify(pl, 1, 4, "You cannot afford to buy this door for $"..RPD.DoorCost.."..")
 	end
 end
 
@@ -92,7 +92,7 @@ function meta:BuyCar(pl)
 	elseif self:IsCar() and !self:IsUnownable() and tonumber(RPD.CarLimit) <= pl.OwnedCars then
 		Notify(pl, 1, 4, "You have reached the car limit..")
 	elseif self:IsCar() and !self:IsUnownable() and tonumber(RPD.CarCost) >= pl:GetMoney() then
-		Notify(pl, 1, 4, "You are too poor to buy this car for $"..RPD.CarCost.."..")
+		Notify(pl, 1, 4, "You cannot afford to buy this car for $"..RPD.CarCost.."..")
 	end
 end
 
