@@ -154,7 +154,7 @@ function RP.InitClasses(ply)
 end
 
 function Notify(ply, msgtype, len, msg)
-	if not ValidEntity(ply) then return end
+	if not IsValid(ply) then return end
 	
 	umsg.Start("_Notify", ply)
 		umsg.String(msg)
