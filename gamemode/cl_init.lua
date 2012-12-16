@@ -6,6 +6,7 @@ DeriveGamemode("sandbox")
 
 include("shared.lua")
 include("cl_chat.lua")
+include("cl_scoreboard.lua")
 
 -- Don't change these values. If you must, make a new font and change to it.
 

@@ -11,6 +11,7 @@ include("sv_chat.lua")
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_chat.lua")
+AddCSLuaFile("cl_scoreboard.lua")
 
 RunConsoleCommand("physgun_limited", "1")
 RunConsoleCommand("sbox_godmode", "0")
