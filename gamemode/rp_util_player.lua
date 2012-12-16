@@ -87,4 +87,4 @@ function meta:DoPayDay()
 	self:AddMoney(tonumber(RP.Teams[self.Class].wage), false, "for being a "..RP.Teams[self.Class].name.."!")
 end
 
-timer.Create("MOST IMPORTANT TIMER EVERRR", 60, 0, function() RP.PayDay() end)
+timer.Exists("PayDayTimer", 60, 0, function() RP.PayDay() end)
