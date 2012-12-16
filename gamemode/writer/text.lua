@@ -4,7 +4,7 @@ local Data = {}
 local META = {}
 
 function META:__index(k)
-	return RP.GetData(k) or rawget(self,k)
+	return rawget(self,k)
 end
 
 function META:GetTable()

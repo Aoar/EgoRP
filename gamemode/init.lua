@@ -1,3 +1,8 @@
+GM.Version = "0.0.1"
+GM.Name = "EgoRP"
+GM.Author = "Original: Sadistic Slayer, Miss Pink, Pcwizdan, EgoRP: Aoar, Zero"
+
+DeriveGamemode("sandbox")
 
 include("shared.lua")
 include("player.lua")
@@ -8,13 +13,6 @@ AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_propprotection.lua")
 AddCSLuaFile("cl_chat.lua")
-
-AddCSLuaFile( "scoreboard/admin_buttons.lua" )
-AddCSLuaFile( "scoreboard/player_frame.lua" )
-AddCSLuaFile( "scoreboard/player_infocard.lua" )
-AddCSLuaFile( "scoreboard/player_row.lua" )
-AddCSLuaFile( "scoreboard/scoreboard.lua" )
-AddCSLuaFile( "scoreboard/vote_button.lua" )
 
 AddCSLuaFile( "cl_scoreboard.lua" )
 
